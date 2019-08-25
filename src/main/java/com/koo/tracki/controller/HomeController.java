@@ -95,4 +95,11 @@ public class HomeController {
 		return "redirect:/loginform";
 	}
 	
+	
+	@RequestMapping(value = "/calendar", method = RequestMethod.GET)
+	public String calendar(Model model) {
+		logger.info("Open calendar page");
+		return "calendar";
+	}
+	
 }
