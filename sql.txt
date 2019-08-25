@@ -1,0 +1,29 @@
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '1q2w3e!@';
+UPDATE mysql.user
+    set authentication_string=PASSWORD("MyNewPass"),
+    password_expired='N',
+    plugin='mysql_native_password'
+where User='root';
+
+CREATE TABLE IF NOT EXISTS `mydb`.`usertable` (
+  `uidx` INT NOT NULL AUTO_INCREMENT,
+  `uid` VARCHAR(20) NOT NULL,
+  `pw` VARCHAR(20) NOT NULL,
+  `nick` VARCHAR(45) NULL,
+  `bdate` DATE NULL,
+  `gender` CHAR(1) NULL,
+  PRIMARY KEY (`uidx`),
+  UNIQUE INDEX `userid_UNIQUE` (`uidx` ASC) VISIBLE,
+  UNIQUE INDEX `uid_UNIQUE` (`uid` ASC) VISIBLE)
+ENGINE = InnoDB
+
+CREATE TABLE IF NOT EXISTS `MYDB`.`usertable` (
+  `uid` VARCHAR(20) NOT NULL,
+  `pw` VARCHAR(20) NOT NULL,
+  `email` VARCHAR(50),
+  `nick` VARCHAR(20) NULL,
+  `bdate` DATE NULL,
+  `gender` CHAR(1) NULL,
+  PRIMARY KEY (`uid`),
+  UNIQUE INDEX `uid_UNIQUE` (`uid` ASC) VISIBLE)
+ENGINE = InnoDB
