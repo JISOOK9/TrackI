@@ -2,7 +2,7 @@
 <%@ page session="false"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
@@ -13,6 +13,9 @@
 <meta name="author" content="">
 
 <title>trackInside</title>
+<script src="//code.jquery.com/jquery-3.2.1.min.js"
+	type="text/javascript">	
+</script>
 
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +30,8 @@
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="css/resume.css" rel="stylesheet">
+<link href="css/userMain.css" rel="stylesheet">
+<script src="js/userMain.js"></script>
 
 </head>
 
@@ -61,7 +65,7 @@
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="calendar">Skills</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#interests">Interests</a></li>
+					href="#setOwnFactors">Factors</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="#awards">Awards</a></li>
 			</ul>
@@ -115,55 +119,38 @@
 
 		<hr class="m-0">
 
-		<section
+			<section
 			class="resume-section p-3 p-lg-5 d-flex justify-content-center"
-			id="signup">
+			id="setOwnFactors">
 			<div class="w-100">
-				<h2 class="mb-5">SignUp</h2>
+				<h2 class="mb-5">Set Your Own Factors</h2>
 
 				<div
 					class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
 					<div class="resume-content">
-						<form action="userReg" method="post" enctype="utf-8">
-							<p>
-								<label>ID:<br> <input type="text" name="uid" />
-								</label>
-							</p>
-							<p>
-								<label>Password:<br> <input type="password"
-									name="pw" />
-								</label>
-							</p>
-							<p>
-								<label>Email:<br> <input type="text" name="email" />
-								</label>
-							</p>
-							<p>
-								<label>Nickname:<br> <input type="text" name="nick" />
-								</label>
-							</p>
-							<p>
-								<label>Gender:<br> <input type="radio"
-									name="gender" value="M">Male <input type="radio"
-									name="gender" value="F">Female
+					<form action="addFactor" method="post" enctype="utf-8" accept-charset="UTF-8">
+					<input type="submit" value="Save"> <input type="reset"
+								value="Cancel"><br>
+						<button id="addItemBtn">Add Factor</button>
+						
+						<table id="example">
+						<tr class="item0" id="sampleField">
+								<td><input type="text" placeholder="Add Your Own Factor"/>
+								<td><button class="delBtn">delete</button></td>
+							</tr>
+							<tr class="item1">
+								<td><input type="text" placeholder="Add Your Own Factor"/>
+								<td><button class="delBtn">delete</button></td>
+							</tr>
 
-								</label>
-							</p>
-							<p>
-								<label>BirthDate:<br> <input type="date"
-									name="bdate" />
-								</label>
-							</p>
-							<input type="submit" value="Create"> <input type="reset"
-								value="Cancel">
+						</table>
 						</form>
 					</div>
 
 
-
 				</div>
+			</div>
 		</section>
-
 		<hr class="m-0">
 
 		<section class="resume-section p-3 p-lg-5 d-flex align-items-center"
