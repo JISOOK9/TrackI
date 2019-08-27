@@ -11,14 +11,24 @@ $(document).on('click', ".delBtn", function() {
 
 $(document).on('click', "#addItemBtn", function() {
 	// item 의 최대번호 구하기
-	var lastItemNo = $("#example tr:last").attr("class").replace("item", "");
+	var lastItemNo = $("#factorTbl tr:last").attr("class").replace("item", "");
 	alert(lastItemNo);
-	var newitem = $("#example tr:eq(0)").clone();
+/*	alert($("#factorTbl tr:last").attr("class"));*/
+	var newitem = $("#factorTbl tr:eq(0)").clone();
 	newitem.removeClass();
 	newitem.find("td:eq(0)").attr("rowspan", "1");
-	newitem.addClass("item" + (parseInt(lastItemNo) + 1));
 
-	$("#example").append(newitem);
+		/*$("#factorTbl tr td input").eq(0).attr("id");*/
+	var classname = "item" + (parseInt(lastItemNo) + 1);
+	var inputid = classname.replace("item", "factor");
+	newitem.addClass(classname);
+
+	$("#factorTbl").append(newitem);
+	var newinput = $("#factorTbl tr:last td input");
+	//newinput.addClass(inputid);
+	$("#factorTbl tr:last td input").attr("name", inputid);
+	var test = $("#factorTbl tr:last td input").attr("name");
+	alert(test);
 });
 
 function loadJQuery() {

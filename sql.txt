@@ -27,3 +27,30 @@ CREATE TABLE IF NOT EXISTS `MYDB`.`usertable` (
   PRIMARY KEY (`uid`),
   UNIQUE INDEX `uid_UNIQUE` (`uid` ASC) VISIBLE)
 ENGINE = InnoDB
+
+CREATE TABLE factortable (
+  `uid` VARCHAR(20) NOT NULL,
+  `factor1` VARCHAR(20) NOT NULL,
+  `factor2` VARCHAR(20) NOT NULL,
+  `factor3` VARCHAR(20) NOT NULL,
+  `factor4` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`uid`),
+  FOREIGN KEY (`uid`) REFERENCES usertable(uid));
+ENGINE = InnoDB
+
+22:06:40	CREATE TABLE factortable (   `uid` VARCHAR(20) NOT NULL,   `factor1` VARCHAR(20) NOT NULL,   `factor2` VARCHAR(20) NOT NULL,   `factor3` VARCHAR(20) NOT NULL,   `factor4` VARCHAR(20) NOT NULL,   PRIMARY KEY (`uid`),   FOREIGN KEY (`uid`) REFERENCES usertable(uid))	0 row(s) affected	0.094 sec
+
+CREATE TRIGGER factorInsertTrg AFTER INSERT ON usertable 
+FOR EACH ROW 
+INSERT INTO factortable SET uid=NEW.uid, factor1=NULL, factor2=NULL, factor3=NULL, factor4=NULL;
+CREATE TRIGGER factorInsertTrg AFTER INSERT ON usertable 
+FOR EACH ROW BEGIN 
+INSERT INTO factortable SET uid=NEW.uid; END
+if NEW.column1 <> OLD.column1 begin INSERT INTO factortable end END
+
+ALTER TABLE factortable ALTER factor1 SET DEFAULT NULL;
+
+
+CREATE TRIGGER factorInsertTrg AFTER INSERT ON usertable 
+FOR EACH ROW 
+INSERT INTO factortable SET uid=NEW.uid;

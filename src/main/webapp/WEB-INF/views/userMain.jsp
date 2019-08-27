@@ -56,18 +56,16 @@
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="#about">Home</a></li>
-				<li class="nav-item">
-					<!--         	<a class="nav-link" href="index.html">Home</a> --> <a
-					class="nav-link js-scroll-trigger" href="#signin">SignIn</a>
-				</li>
+
+
+
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#signup">SignUp</a></li>
+					href="calendar">Calendar</a></li>
+
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="calendar">Skills</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#setOwnFactors">Factors</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#awards">Awards</a></li>
+					href="#awards">Statistics</a></li>
+									<li class="nav-item"><a class="nav-link js-scroll-trigger"
+					href="#setOwnFactors">Settings</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -86,7 +84,7 @@
 					<form action="scoreDay" method="post" enctype="utf-8">
 
 						<p>
-							<label>Today`s score:<br> 
+							<label>Today`s Mood Score:<br> 
 							<input type="radio" name="dayscore"
 								value="5">&nbsp; 5 &nbsp; &nbsp; &nbsp; <input type="radio" name="dayscore"
 								value="4">&nbsp; 4 &nbsp; &nbsp; &nbsp; <input type="radio" name="dayscore"
@@ -97,23 +95,17 @@
 							</label>
 						</p>
 						<p>
-							<label>Today`s Memo:<br> <textarea cols="100" rows="5"
+							<label>Today`s Memo:<br> <textarea cols="60" rows="5"
 								name="memo" ></textarea>
 							</label>
 						</p>
-						<input type="submit" value="Create"> <input type="reset"
+						<input type="submit" value="Save"> <input type="reset"
 							value="Cancel">
 					</form>
 				</div>
 				<p class="lead mb-5">Record Your Day_Keep Score Your Day___Find
 					Your Inner Self!</p>
-				<div class="social-icons">
-					<a href="#"> <i class="fab fa-linkedin-in"></i>
-					</a> <a href="#"> <i class="fab fa-github"></i>
-					</a> <a href="#"> <i class="fab fa-twitter"></i>
-					</a> <a href="#"> <i class="fab fa-facebook-f"></i>
-					</a>
-				</div>
+
 			</div>
 		</section>
 
@@ -128,22 +120,21 @@
 				<div
 					class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
 					<div class="resume-content">
-					<form action="addFactor" method="post" enctype="utf-8" accept-charset="UTF-8">
-					<input type="submit" value="Save"> <input type="reset"
-								value="Cancel"><br>
-						<button id="addItemBtn">Add Factor</button>
-						
-						<table id="example">
+					<button id="addItemBtn">Add Factor</button>
+					<form action="addFactors" method="post" enctype="utf-8" accept-charset="UTF-8">
+						<table id="factorTbl">
 						<tr class="item0" id="sampleField">
-								<td><input type="text" placeholder="Add Your Own Factor"/>
+								<td><input type="text" name=factor0 placeholder="Add Your Own Factor" id="test"/>
 								<td><button class="delBtn">delete</button></td>
 							</tr>
 							<tr class="item1">
-								<td><input type="text" placeholder="Add Your Own Factor"/>
+								<td><input type="text" name=factor1 placeholder="Add Your Own Factor"/>
 								<td><button class="delBtn">delete</button></td>
 							</tr>
 
 						</table>
+						<input type="submit" value="Apply"> <input type="reset"
+								value="Cancel"><br>
 						</form>
 					</div>
 
@@ -215,52 +206,6 @@
 					<li><i class="fa-li fa fa-check"></i> Cross Functional Teams</li>
 					<li><i class="fa-li fa fa-check"></i> Agile Development &amp;
 						Scrum</li>
-				</ul>
-			</div>
-		</section>
-
-		<hr class="m-0">
-
-		<section class="resume-section p-3 p-lg-5 d-flex align-items-center"
-			id="interests">
-			<div class="w-100">
-				<h2 class="mb-5">Interests</h2>
-				<p>Apart from being a web developer, I enjoy most of my time
-					being outdoors. In the winter, I am an avid skier and novice ice
-					climber. During the warmer months here in Colorado, I enjoy
-					mountain biking, free climbing, and kayaking.</p>
-				<p class="mb-0">When forced indoors, I follow a number of sci-fi
-					and fantasy genre movies and television shows, I am an aspiring
-					chef, and I spend a large amount of my free time exploring the
-					latest technology advancements in the front-end web development
-					world.</p>
-			</div>
-		</section>
-
-		<hr class="m-0">
-
-		<section class="resume-section p-3 p-lg-5 d-flex align-items-center"
-			id="awards">
-			<div class="w-100">
-				<h2 class="mb-5">Awards &amp; Certifications</h2>
-				<ul class="fa-ul mb-0">
-					<li><i class="fa-li fa fa-trophy text-warning"></i> Google
-						Analytics Certified Developer</li>
-					<li><i class="fa-li fa fa-trophy text-warning"></i> Mobile Web
-						Specialist - Google Certification</li>
-					<li><i class="fa-li fa fa-trophy text-warning"></i> 1<sup>st</sup>
-						Place - University of Colorado Boulder - Emerging Tech Competition
-						2009</li>
-					<li><i class="fa-li fa fa-trophy text-warning"></i> 1<sup>st</sup>
-						Place - University of Colorado Boulder - Adobe Creative Jam 2008
-						(UI Design Category)</li>
-					<li><i class="fa-li fa fa-trophy text-warning"></i> 2<sup>nd</sup>
-						Place - University of Colorado Boulder - Emerging Tech Competition
-						2008</li>
-					<li><i class="fa-li fa fa-trophy text-warning"></i> 1<sup>st</sup>
-						Place - James Buchanan High School - Hackathon 2006</li>
-					<li><i class="fa-li fa fa-trophy text-warning"></i> 3<sup>rd</sup>
-						Place - James Buchanan High School - Hackathon 2005</li>
 				</ul>
 			</div>
 		</section>

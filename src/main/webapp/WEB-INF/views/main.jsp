@@ -159,7 +159,7 @@
 									name="pw" />
 								</label>
 							</p>
-							<input type="submit" value="Create"> <input type="reset"
+							<input type="submit" value="Login"> <input type="reset"
 								value="Cancel">
 						</form>
 
