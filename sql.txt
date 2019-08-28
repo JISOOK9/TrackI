@@ -30,7 +30,7 @@ ENGINE = InnoDB
 
 CREATE TABLE factortable (
   `uid` VARCHAR(20) NOT NULL,
-  `factor1` VARCHAR(20) NOT NULL,
+  `factor1` VARCHAR(20) NOT NULL,
   `factor2` VARCHAR(20) NOT NULL,
   `factor3` VARCHAR(20) NOT NULL,
   `factor4` VARCHAR(20) NOT NULL,
@@ -54,3 +54,17 @@ ALTER TABLE factortable ALTER factor1 SET DEFAULT NULL;
 CREATE TRIGGER factorInsertTrg AFTER INSERT ON usertable 
 FOR EACH ROW 
 INSERT INTO factortable SET uid=NEW.uid;
+
+
+CREATE TABLE datatable (
+	did VARCHAR(30) NOT NULL,
+	uid VARCHAR(20) NOT NULL,
+	ddate DATE NOT NULL,
+	SCR_MOOD INT,
+	SCR_F1 INT,
+	SCR_F2 INT,
+	SCR_F3 INT,
+	SCR_F4 INT,
+	MEMO VARCHAR(300)
+);
+
