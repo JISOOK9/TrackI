@@ -73,6 +73,10 @@
 					<a class="nav-link js-scroll-trigger"
 					href="setFactorForm">Set_Own_Factors</a> 
 				</li>
+				<li class="nav-item">
+					<a class="nav-link js-scroll-trigger"
+					href="#" id="logoutBtn">Log_out</a> 
+				</li>
 			</ul>
 		</div>
 	</nav>

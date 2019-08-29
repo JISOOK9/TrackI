@@ -31,6 +31,13 @@ $(document).on('click', "#addItemBtn", function() {
 /*	alert(test);*/
 });
 
+$(document).on('click', "#logoutBtn", function() {
+	if(window.confirm("Do you want to logout?")) {
+		
+		window.location.href="userLogout";
+	}
+});
+
 function loadJQuery() {
 	var oScript = document.createElement("script");
 	oScript.type = "text/javascript";
@@ -38,3 +45,4 @@ function loadJQuery() {
 	oScript.src = "http://code.jquery.com/jquery-1.6.2.min.js";
 	document.getElementsByTagName("head")[0].appendChild(oScript);
 }
+
