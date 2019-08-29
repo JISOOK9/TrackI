@@ -20,6 +20,7 @@ public class FactorDto {
 	}
 
 	public void setFactor1(String factor1) {
+		if(factor1=="") factor1=null;
 		this.factor1 = factor1;
 	}
 	
@@ -28,6 +29,7 @@ public class FactorDto {
 	}
 
 	public void setFactor2(String factor2) {
+		if(factor2=="") factor2=null;
 		this.factor2 = factor2;
 	}
 
@@ -36,6 +38,7 @@ public class FactorDto {
 	}
 
 	public void setFactor3(String factor3) {
+		if(factor3=="") factor3=null;
 		this.factor3 = factor3;
 	}
 
@@ -44,6 +47,7 @@ public class FactorDto {
 	}
 
 	public void setFactor4(String factor4) {
+		if(factor4=="") factor4=null;
 		this.factor4 = factor4;
 	}
 

@@ -4,4 +4,5 @@ import com.koo.tracki.db.FactorDto;
 
 public interface FactorService {
 	public void addFactors(FactorDto dto);
+	public FactorDto getFactors(String uid);
 }

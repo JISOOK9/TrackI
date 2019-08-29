@@ -28,7 +28,7 @@ $(document).on('click', "#addItemBtn", function() {
 	//newinput.addClass(inputid);
 	$("#factorTbl tr:last td input").attr("name", inputid);
 	var test = $("#factorTbl tr:last td input").attr("name");
-/*	alert(test);*/
+
 });
 
 function loadJQuery() {
@@ -37,4 +37,9 @@ function loadJQuery() {
 	oScript.charset = "utf-8";
 	oScript.src = "http://code.jquery.com/jquery-1.6.2.min.js";
 	document.getElementsByTagName("head")[0].appendChild(oScript);
+}
+
+
+function userMainDir(nick){	
+	window.location.href = "./userMain";
 }

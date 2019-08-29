@@ -1,5 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<%@ page session="true"%>
+<%@ page import="com.koo.tracki.db.*"%>
 
 <!DOCTYPE html>
 <html>
@@ -14,7 +20,8 @@
 
 <title>trackInside</title>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"
-	type="text/javascript">	
+	type="text/javascript">
+	
 </script>
 
 <!-- Bootstrap core CSS -->
@@ -55,17 +62,17 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#about">Home</a></li>
-
-
-
+					href="#user-main">Score_Today</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="calendar">Calendar</a></li>
-
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#awards">Statistics</a></li>
-									<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#setOwnFactors">Settings</a></li>
+					href="#score">Score_Factors</a></li>
+				<!-- <li class="nav-item"><a class="nav-link js-scroll-trigger"
+					href="sttProcess">Statistics</a></li> -->
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+					href="sttResult">Correlations</a></li>
+				<li class="nav-item">
+					<a class="nav-link js-scroll-trigger"
+					href="setFactorForm">Set_Own_Factors</a> 
+				</li>
 			</ul>
 		</div>
 	</nav>
@@ -73,30 +80,32 @@
 	<div class="container-fluid p-0">
 
 		<section class="resume-section p-3 p-lg-5 d-flex align-items-center"
-			id="about">
+			id="user-main">
 			<div class="w-100">
-				<h1 class="mb-0">
-					Hi ${nick} !</h1>
-					<h2><span class="text-primary"><br>How was your
-						day?</span></h2>
+				<%-- <h1 class="mb-0">Hi ${nick} !</h1> --%>
+				<h1 class="mb-0">Hi,  ${nick} !</h1>
+				<h2>
+					<span class="text-primary"><br>How was your day?</span>
+				</h2>
 				<br>
 				<div class="subheading mb-5">
 					<form action="scoreDay" method="post" enctype="utf-8">
 
 						<p>
-							<label>Today`s Mood Score:<br> 
-							<input type="radio" name="dayscore"
-								value="5">&nbsp; 5 &nbsp; &nbsp; &nbsp; <input type="radio" name="dayscore"
-								value="4">&nbsp; 4 &nbsp; &nbsp; &nbsp; <input type="radio" name="dayscore"
-								value="3">&nbsp; 3&nbsp; &nbsp; &nbsp; <input type="radio" name="dayscore"
-								value="2">&nbsp; 2&nbsp; &nbsp; &nbsp; <input type="radio" name="dayscore"
-								value="1">&nbsp; 1
+							<label>Today`s Mood Score:<br> <input type="radio"
+								name="scrMood" value="5">&nbsp; 5 &nbsp; &nbsp; &nbsp;
+								<input type="radio" name="scrMood" value="4">&nbsp; 4
+								&nbsp; &nbsp; &nbsp; <input type="radio" name="scrMood"
+								value="3">&nbsp; 3&nbsp; &nbsp; &nbsp; <input
+								type="radio" name="scrMood" value="2">&nbsp; 2&nbsp;
+								&nbsp; &nbsp; <input type="radio" name="scrMood" value="1">&nbsp;
+								1
 
 							</label>
 						</p>
 						<p>
-							<label>Today`s Memo:<br> <textarea cols="60" rows="5"
-								name="memo" ></textarea>
+							<label>Today`s Memo:<br> <textarea cols="60"
+									rows="5" name="memo"></textarea>
 							</label>
 						</p>
 						<input type="submit" value="Save"> <input type="reset"
@@ -111,103 +120,81 @@
 
 		<hr class="m-0">
 
-			<section
-			class="resume-section p-3 p-lg-5 d-flex justify-content-center"
-			id="setOwnFactors">
-			<div class="w-100">
-				<h2 class="mb-5">Set Your Own Factors</h2>
-
-				<div
-					class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-					<div class="resume-content">
-					<button id="addItemBtn">Add Factor</button>
-					<form action="addFactors" method="post" enctype="utf-8" accept-charset="UTF-8">
-						<table id="factorTbl">
-						<tr class="item0" id="sampleField">
-								<td><input type="text" name=factor0 placeholder="Add Your Own Factor" id="test"/>
-								<td><button class="delBtn">delete</button></td>
-							</tr>
-							<tr class="item1">
-								<td><input type="text" name=factor1 placeholder="Add Your Own Factor"/>
-								<td><button class="delBtn">delete</button></td>
-							</tr>
-
-						</table>
-						<input type="submit" value="Apply"> <input type="reset"
-								value="Cancel"><br>
-						</form>
-					</div>
-
-
-				</div>
-			</div>
-		</section>
-		<hr class="m-0">
-
 		<section class="resume-section p-3 p-lg-5 d-flex align-items-center"
-			id="signin">
+			id="score">
 			<div class="w-100">
-				<h2 class="mb-5">SignIn</h2>
+				<h2 class="mb-5">Score Your Own Factors</h2>
+				
+				<div class="subheading mb-3">
+					<form action="scoreFactors" method="post" enctype="utf-8">
+						<c:if test="${factors.factor1 != null}">	
+						<p>
+		
+											<label class="factorLabel">- ${factors.factor1}</label><br> 
+											
+						<input type="radio" name="scrF1" value="5">&nbsp; 5 &nbsp;
+							&nbsp; &nbsp; <input type="radio" name="scrF1" value="4">&nbsp;
+							4 &nbsp; &nbsp; &nbsp; <input type="radio" name="scrF1"
+								value="3">&nbsp; 3&nbsp; &nbsp; &nbsp; <input
+								type="radio" name="scrF1" value="2">&nbsp; 2&nbsp;
+							&nbsp; &nbsp; <input type="radio" name="scrF1" value="1">&nbsp;
+							1
 
-				<div
-					class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-					<div class="resume-content">
-						<form action="login" method="post" enctype="utf-8">
-							<p>
-								<label>ID:<br> <input type="text" name="uid" />
-								</label>
-							</p>
-							<p>
-								<label>Password:<br> <input type="password"
-									name="pw" />
-								</label>
-							</p>
-							<input type="submit" value="Create"> <input type="reset"
-								value="Cancel">
-						</form>
+						
+					</p>
+						</c:if>
+						<c:if test="${factors.factor2 != null}">
+						<p>
+		
+											<label class="factorLabel">- ${factors.factor2}</label><br> 
+						<input type="radio" name="scrF2" value="5">&nbsp; 5 &nbsp;
+							&nbsp; &nbsp; <input type="radio" name="scrF2" value="4">&nbsp;
+							4 &nbsp; &nbsp; &nbsp; <input type="radio" name="scrF2"
+								value="3">&nbsp; 3&nbsp; &nbsp; &nbsp; <input
+								type="radio" name="scrF2" value="2">&nbsp; 2&nbsp;
+							&nbsp; &nbsp; <input type="radio" name="scrF2" value="1">&nbsp;
+							1
 
-					</div>
+						
+					</p>
+						</c:if>
+						<c:if test="${factors.factor3 != null}">
+						<p>
+		
+											<label class="factorLabel">- ${factors.factor3}</label><br> 
+						<input type="radio" name="scrF3" value="5">&nbsp; 5 &nbsp;
+							&nbsp; &nbsp; <input type="radio" name="scrF3" value="4">&nbsp;
+							4 &nbsp; &nbsp; &nbsp; <input type="radio" name="scrF3"
+								value="3">&nbsp; 3&nbsp; &nbsp; &nbsp; <input
+								type="radio" name="scrF3" value="2">&nbsp; 2&nbsp;
+							&nbsp; &nbsp; <input type="radio" name="scrF3" value="1">&nbsp;
+							1
+
+						
+					</p>
+						</c:if>
+						<c:if test="${factors.factor4 != null}">
+						<p>
+		
+											<label class="factorLabel">- ${factors.factor4}</label><br> 
+						<input type="radio" name="scrF4" value="5">&nbsp; 5 &nbsp;
+							&nbsp; &nbsp; <input type="radio" name="scrF4" value="4">&nbsp;
+							4 &nbsp; &nbsp; &nbsp; <input type="radio" name="scrF4"
+								value="3">&nbsp; 3&nbsp; &nbsp; &nbsp; <input
+								type="radio" name="scrF4" value="2">&nbsp; 2&nbsp;
+							&nbsp; &nbsp; <input type="radio" name="scrF4" value="1">&nbsp;
+							1
+
+						
+					</p>
+						</c:if>
+
+					<input type="submit" value="Save"> <input type="reset"
+							value="Clear"> 
+				</form>
 				</div>
 
-			</div>
-		</section>
-
-		<hr class="m-0">
-
-		<section class="resume-section p-3 p-lg-5 d-flex align-items-center"
-			id="skills">
-			<div class="w-100">
-				<h2 class="mb-5">Skills</h2>
-
-				<div class="subheading mb-3">Programming Languages &amp; Tools</div>
-				<ul class="list-inline dev-icons">
-					<li class="list-inline-item"><i class="fab fa-html5"></i></li>
-					<li class="list-inline-item"><i class="fab fa-css3-alt"></i></li>
-					<li class="list-inline-item"><i class="fab fa-js-square"></i>
-					</li>
-					<li class="list-inline-item"><i class="fab fa-angular"></i></li>
-					<li class="list-inline-item"><i class="fab fa-react"></i></li>
-					<li class="list-inline-item"><i class="fab fa-node-js"></i></li>
-					<li class="list-inline-item"><i class="fab fa-sass"></i></li>
-					<li class="list-inline-item"><i class="fab fa-less"></i></li>
-					<li class="list-inline-item"><i class="fab fa-wordpress"></i>
-					</li>
-					<li class="list-inline-item"><i class="fab fa-gulp"></i></li>
-					<li class="list-inline-item"><i class="fab fa-grunt"></i></li>
-					<li class="list-inline-item"><i class="fab fa-npm"></i></li>
-				</ul>
-
-				<div class="subheading mb-3">Workflow</div>
-				<ul class="fa-ul mb-0">
-					<li><i class="fa-li fa fa-check"></i> Mobile-First, Responsive
-						Design</li>
-					<li><i class="fa-li fa fa-check"></i> Cross Browser Testing
-						&amp; Debugging</li>
-					<li><i class="fa-li fa fa-check"></i> Cross Functional Teams</li>
-					<li><i class="fa-li fa fa-check"></i> Agile Development &amp;
-						Scrum</li>
-				</ul>
-			</div>
+				
 		</section>
 
 	</div>

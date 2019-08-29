@@ -13,9 +13,13 @@ public class FactorServiceImpl implements FactorService {
 	private FactorDaoImpl dao;
 	
 	@Override
+	public FactorDto getFactors(String uid) {
+		return dao.getFactors(uid);
+	}
+
+	@Override
 	public void addFactors(FactorDto dto) {
 			dao.updateFactors(dto);
-
 	}
 
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.koo.tracki.db.FactorDto;
 import com.koo.tracki.db.UserDto;
+import com.koo.tracki.service.FactorServiceImpl;
 import com.koo.tracki.service.userRegServiceImpl;
 
 /**
@@ -32,6 +33,9 @@ public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	private userRegServiceImpl userRegService;
+	
+	@Autowired
+	private FactorServiceImpl factorService;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -51,9 +55,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/userMain", method = RequestMethod.GET)
-	public String main(@RequestParam("loginnick") String loginnick, Model model) {
-		model.addAttribute("nick", loginnick );
-		
+	public String main(HttpServletRequest req, Model model) {
+		HttpSession session = req.getSession();
+		String nickname = (String)session.getAttribute("nick");
+		String uid = (String)session.getAttribute("uid");
+		FactorDto fdto = factorService.getFactors(uid);
+		model.addAttribute("nick", nickname);
+		model.addAttribute("factors", fdto);
+		System.out.println("usermain param : " + nickname);
 		return "userMain";
 	}
 	
@@ -70,10 +79,14 @@ public class UserController {
 		String nickname = userRegService.login(dto);
 		if(nickname != null) {
 			HttpSession session = req.getSession();
-			session.setAttribute("uid", dto.getUid());
-			model.addAttribute("loginnick", nickname);
+			String uid = dto.getUid();
+			session.setAttribute("uid", uid);
+			session.setAttribute("nick", nickname);
+			FactorDto fdto = factorService.getFactors(uid);
+			model.addAttribute("nick", nickname);
+			model.addAttribute("factors", fdto);
 			logger.info("Login success : " + nickname );
-			return "redirect:/userMain";
+			return "userMain";
 		}
 			
 		else {
@@ -95,7 +108,8 @@ public class UserController {
 		logger.info("Register new member");
 		System.out.println(dto);
 		userRegService.insertUser(dto);
-		return "redirect:/loginform";
+		//tbd : switch page to sign in page
+		return "main";
 	}
 	
 	

@@ -9,6 +9,7 @@ public class FactorDaoImpl implements FactorDao {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
 	private static final String NAMESPACE="com.koo.tracki.db.FactorMapper";
 	
 	@Override

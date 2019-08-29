@@ -192,3 +192,12 @@ a:hover, a:focus, a:active {
 .item0 {
 	display: none;
 }
+
+.factorLabel {
+	color: #824027;
+	font-size: 2rem;
+}
+
+input[type=radio] {
+	color: #824027;
+}

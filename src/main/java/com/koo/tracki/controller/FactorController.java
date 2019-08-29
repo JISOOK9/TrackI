@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -23,14 +24,37 @@ public class FactorController {
 	
 	@PostMapping(value = "/addFactors")
 	public String addUserFactors(@ModelAttribute FactorDto dto, Model model, HttpServletRequest req) {
-		
-		
 		HttpSession session = req.getSession();
 		String loggedinUser = (String)session.getAttribute("uid");
+		String loggedinNick = (String)session.getAttribute("nick");
 		dto.setUid(loggedinUser);
-		System.out.println(dto);
+		System.out.println(loggedinNick);
 		factorService.addFactors(dto);
 		logger.info("Add factors on db" + loggedinUser);
-		return "calendar";
+		model.addAttribute("nick", loggedinNick);
+		model.addAttribute("factors", dto);
+		return "redirect:/userMain";
+	}
+	
+	@GetMapping(value = "/scoreFactorsForm")
+	public String scoreFactorsForm(Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String loggedinUser = (String)session.getAttribute("uid");
+		System.out.println(loggedinUser);
+		FactorDto dto = factorService.getFactors(loggedinUser);
+		System.out.println("get dto :" + dto);
+		model.addAttribute("factors", dto);
+		return "scoreFactorsForm";
+	}
+	
+	@GetMapping(value = "/setFactorForm")
+	public String setFactorForm(Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String loggedinUser = (String)session.getAttribute("uid");
+		System.out.println(loggedinUser);
+		FactorDto dto = factorService.getFactors(loggedinUser);
+		System.out.println("get dto :" + dto);
+		model.addAttribute("factors", dto);
+		return "factorSetForm";
 	}
 }
